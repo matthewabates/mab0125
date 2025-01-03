@@ -1,6 +1,6 @@
 package com.example.tool_rental.model;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +11,17 @@ import java.util.Date;
 public class CheckoutRequest {
     @NotBlank
     String toolCode;
-    int rentalDayCount;
-    float discountPercent;
+
+    @NotNull
+    @Min(1)
+    Integer rentalDayCount;
+
+    @NotNull
+    @Min(0)
+    @Max(100)
+    Integer discountPercent;
+
+    @NotNull
+    @Future
     Date checkoutDate;
 }
