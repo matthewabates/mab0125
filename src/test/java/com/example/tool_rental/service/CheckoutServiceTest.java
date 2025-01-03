@@ -25,6 +25,6 @@ class CheckoutServiceTest {
             "2025-11-11, 60, 2026-01-10, 60 days - next year",
     })
     void testIsHoliday(LocalDate date, int days, LocalDate dueDate, String description) {
-        assertEquals(dueDate, checkoutService.getDueDate(date, days));
+        assertEquals(dueDate, checkoutService.calculateDueDate(date, days));
     }
 }

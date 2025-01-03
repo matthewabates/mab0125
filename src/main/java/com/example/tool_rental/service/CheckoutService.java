@@ -13,7 +13,8 @@ public class CheckoutService {
         return new RentalAgreement();
     }
 
-    public LocalDate getDueDate(LocalDate date, int days) {
+    //Calculated from checkout date and rental days.
+    public LocalDate calculateDueDate(LocalDate date, int days) {
         return date.plusDays(days);
     }
 }
