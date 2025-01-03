@@ -4,7 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -25,5 +25,5 @@ public class CheckoutRequest {
 
     @NotNull
     @Future
-    Date checkoutDate;
+    LocalDate checkoutDate;
 }
