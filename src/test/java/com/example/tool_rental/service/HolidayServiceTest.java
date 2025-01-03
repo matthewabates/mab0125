@@ -29,7 +29,7 @@ class HolidayServiceTest {
         "2024-09-03, false, Day After Labor Day is not a holiday",
         "2025-01-03, false, Random date not a holiday",
     })
-    void testIsHoliday(String date, boolean isHoliday, String description) {
-        assertEquals(isHoliday, holidayService.isHoliday(LocalDate.parse(date)));
+    void testIsHoliday(LocalDate date, boolean isHoliday, String description) {
+        assertEquals(isHoliday, holidayService.isHoliday(date));
     }
 }
