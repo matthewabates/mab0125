@@ -1,4 +1,4 @@
-package com.example.tool_rental.service;
+package com.example.tool_rental.util;
 
 import org.springframework.stereotype.Service;
 
@@ -8,7 +8,17 @@ import java.time.Month;
 import java.time.temporal.TemporalAdjusters;
 
 @Service
-public class HolidayService {
+public class DateUtil {
+
+    public boolean isWeekday(LocalDate date) {
+        return !isWeekend(date);
+    }
+
+    public boolean isWeekend(LocalDate date) {
+        DayOfWeek day = date.getDayOfWeek();
+        return day == DayOfWeek.SATURDAY || day == DayOfWeek.SUNDAY;
+    }
+
     public boolean isHoliday(LocalDate date) {
         return (isIndependenceDay(date) || isLaborDay(date));
     }
