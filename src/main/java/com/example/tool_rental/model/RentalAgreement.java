@@ -1,7 +1,12 @@
 package com.example.tool_rental.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
+@Getter
+@Setter
 public class RentalAgreement {
     Tool tool;
     CheckoutRequest checkoutRequest;
