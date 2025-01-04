@@ -29,7 +29,7 @@ public class DateUtil {
 
         if (independenceDay.getDayOfWeek() == DayOfWeek.SATURDAY) {
             independenceDay = independenceDay.minusDays(1);
-        }else if (independenceDay.getDayOfWeek() == DayOfWeek.SUNDAY) {
+        } else if (independenceDay.getDayOfWeek() == DayOfWeek.SUNDAY) {
             independenceDay = independenceDay.plusDays(1);
         }
 
@@ -42,5 +42,9 @@ public class DateUtil {
                 .with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
 
         return date.equals(laborDay);
+    }
+
+    public LocalDate calculateDueDate(LocalDate date, int days) {
+        return date.plusDays(days);
     }
 }

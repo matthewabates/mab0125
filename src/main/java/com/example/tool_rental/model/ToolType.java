@@ -6,9 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ToolType {
-    String name; //id
-    float dailyCharge;
-    boolean weekdayCharge;
-    boolean weekendCharge;
-    boolean holidayCharge;
+    String name;
+    Float dailyCharge;
+    Boolean weekdayCharge;
+    Boolean weekendCharge;
+    Boolean holidayCharge;
 }
