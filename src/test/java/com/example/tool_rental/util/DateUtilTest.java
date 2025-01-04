@@ -17,7 +17,7 @@ class DateUtilTest {
         dateUtil = new DateUtil();
     }
 
-    @ParameterizedTest(name = "{index}) {0}; {1}; {2}")
+    @ParameterizedTest
     @CsvSource({
             "2025-01-03, true,  Friday",
             "2025-01-04, false, Saturday",
@@ -28,7 +28,7 @@ class DateUtilTest {
         assertEquals(expectedIsWeekday, dateUtil.isWeekday(date));
     }
 
-    @ParameterizedTest(name = "{index}) {0}; {1}; {2}")
+    @ParameterizedTest
     @CsvSource({
             "2025-01-03, false, Friday",
             "2025-01-04, true,  Saturday",
@@ -39,7 +39,7 @@ class DateUtilTest {
         assertEquals(expectedIsWeekend, dateUtil.isWeekend(date));
     }
 
-    @ParameterizedTest(name = "{index}) {0}; {1}; {2}")
+    @ParameterizedTest
     @CsvSource({
         "2025-07-04, true,  Independence Day on a Friday is a holiday",
         "2021-07-04, false, Independence Day on a Sunday is not a holiday",
@@ -55,7 +55,7 @@ class DateUtilTest {
         assertEquals(expectedIsHoliday, dateUtil.isHoliday(date));
     }
 
-    @ParameterizedTest(name = "{index}) {0} + {1} = {2}; {3}")
+    @ParameterizedTest
     @CsvSource({
             "2025-01-03, 1, 2025-01-04, 1 day - same month",
             "2025-01-03, 2, 2025-01-05, 2 days - same month",

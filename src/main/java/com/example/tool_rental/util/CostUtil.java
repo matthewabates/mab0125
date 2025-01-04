@@ -5,6 +5,8 @@ import com.example.tool_rental.model.ToolType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 @Service
@@ -19,9 +21,9 @@ public class CostUtil {
 
     //Count of chargeable days, from day after checkout through and including due date, excluding “no charge” days as specified by the tool type.
     public int calculateChargeDays(RentalAgreement rentalAgreement, ToolType toolType) {
-        LocalDate first = rentalAgreement.getCheckoutDate().plusDays(1);
-        LocalDate last = rentalAgreement.getDueDate().plusDays(1);
-        return first.datesUntil(last)
+        LocalDate dayAfterCheckout = rentalAgreement.getCheckoutDate().plusDays(1);
+        LocalDate dueDate = rentalAgreement.getDueDate().plusDays(1);
+        return dayAfterCheckout.datesUntil(dueDate)
                 .filter(date -> isChargeable(date, toolType))
                 .toList()
                 .size();
@@ -36,20 +38,23 @@ public class CostUtil {
     }
 
     //Calculated as charge days X daily charge. Resulting total rounded half up to cents.
-    public float calculatePreDiscountCharge(RentalAgreement rentalAgreement) {
-        return rentalAgreement.getChargeDays() * rentalAgreement.getDailyRentalCharge();
-        //TODO round
+    public BigDecimal calculatePreDiscountCharge(RentalAgreement rentalAgreement) {
+        BigDecimal chargeDays = BigDecimal.valueOf(rentalAgreement.getChargeDays());
+        BigDecimal dailyRentalCharge = rentalAgreement.getDailyRentalCharge();
+        return chargeDays.multiply(dailyRentalCharge).setScale(2, RoundingMode.HALF_UP);
     }
 
     //Calculated from discount % and pre-discount charge. Resulting amount rounded half up to cents.
-    public float calculateDiscountAmount(RentalAgreement rentalAgreement) {
-        return rentalAgreement.getDiscountPercent() * rentalAgreement.getPreDiscountCharge();
-        //TODO round
+    public BigDecimal calculateDiscountAmount(RentalAgreement rentalAgreement) {
+        BigDecimal discountPercent = BigDecimal.valueOf(rentalAgreement.getDiscountPercent()).divide(BigDecimal.valueOf(100));
+        BigDecimal preDiscountCharge = rentalAgreement.getPreDiscountCharge();
+        return discountPercent.multiply(preDiscountCharge).setScale(2, RoundingMode.HALF_UP);
     }
 
     //Calculated as pre-discount charge - discount amount.
-    public Float calculateFinalCharge(RentalAgreement rentalAgreement) {
-        return rentalAgreement.getPreDiscountCharge() - rentalAgreement.getDiscountAmount();
-        //TODO round
+    public BigDecimal calculateFinalCharge(RentalAgreement rentalAgreement) {
+        BigDecimal preDiscountCharge = rentalAgreement.getPreDiscountCharge();
+        BigDecimal discountAmount = rentalAgreement.getDiscountAmount();
+        return preDiscountCharge.subtract(discountAmount).setScale(2, RoundingMode.HALF_UP);
     }
 }
