@@ -21,21 +21,21 @@ public class CheckoutController {
     @Autowired
     CheckoutService checkoutService;
 
-    @PostMapping("checkout")
-    public RentalAgreement checkout(@Valid @RequestBody CheckoutRequest checkoutRequest) {
-        return checkoutService.checkout(checkoutRequest);
+    @PostMapping("/checkout")
+    public ResponseEntity<RentalAgreement> checkout(@Valid @RequestBody CheckoutRequest checkoutRequest) {
+        RentalAgreement rentalAgreement = checkoutService.checkout(checkoutRequest);
+        return ResponseEntity.ok(rentalAgreement);
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Map<String, String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-        return errors;
+        return ResponseEntity.badRequest().body(errors);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
