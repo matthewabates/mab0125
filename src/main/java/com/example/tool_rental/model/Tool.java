@@ -13,8 +13,10 @@ import lombok.Setter;
 public class Tool {
     @Id
     String toolCode;
+
     @ManyToOne
     @JoinColumn(name = "toolType", referencedColumnName = "name")
     ToolType toolType;
+
     String brand;
 }

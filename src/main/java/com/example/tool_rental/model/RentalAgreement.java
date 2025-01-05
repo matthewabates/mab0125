@@ -12,7 +12,6 @@ import java.util.Locale;
 @Getter
 @Setter
 public class RentalAgreement {
-
     String toolCode; //Specified at checkout
     String toolType; //From tool info
     String toolBrand; //From tool info

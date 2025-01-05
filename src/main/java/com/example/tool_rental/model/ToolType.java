@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 public class ToolType {
     @Id
     String name;
+
     BigDecimal dailyCharge;
     Boolean weekdayCharge;
     Boolean weekendCharge;
