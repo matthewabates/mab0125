@@ -2,7 +2,6 @@ package com.example.tool_rental.util;
 
 import com.example.tool_rental.model.RentalAgreement;
 import com.example.tool_rental.model.ToolType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -14,7 +13,6 @@ public class CostUtil {
 
     DateUtil dateUtil;
 
-    @Autowired
     public CostUtil(DateUtil dateUtil) {
         this.dateUtil = dateUtil;
     }
