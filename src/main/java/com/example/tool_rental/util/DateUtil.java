@@ -10,6 +10,10 @@ import java.time.temporal.TemporalAdjusters;
 @Service
 public class DateUtil {
 
+    public LocalDate calculateDueDate(LocalDate date, int days) {
+        return date.plusDays(days);
+    }
+
     public boolean isWeekday(LocalDate date) {
         return !isWeekend(date);
     }
@@ -44,7 +48,4 @@ public class DateUtil {
         return date.equals(laborDay);
     }
 
-    public LocalDate calculateDueDate(LocalDate date, int days) {
-        return date.plusDays(days);
-    }
 }
