@@ -49,6 +49,8 @@ public class CheckoutService {
         rentalAgreement.setDiscountAmount(costUtil.calculateDiscountAmount(rentalAgreement));
         rentalAgreement.setFinalCharge(costUtil.calculateFinalCharge(rentalAgreement));
 
+        rentalAgreement.printToConsole();
+
         return rentalAgreement;
     }
 
