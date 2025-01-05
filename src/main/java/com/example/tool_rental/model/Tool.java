@@ -12,11 +12,11 @@ import lombok.Setter;
 @Entity
 public class Tool {
     @Id
-    String toolCode;
+    private String toolCode;
 
     @ManyToOne
     @JoinColumn(name = "toolType", referencedColumnName = "name")
-    ToolType toolType;
+    private ToolType toolType;
 
-    String brand;
+    private String brand;
 }

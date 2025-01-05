@@ -12,20 +12,20 @@ import java.util.Locale;
 @Getter
 @Setter
 public class RentalAgreement {
-    String toolCode; //Specified at checkout
-    String toolType; //From tool info
-    String toolBrand; //From tool info
-    BigDecimal dailyRentalCharge; //Amount per day, specified by the tool type.
+    private String toolCode; //Specified at checkout
+    private String toolType; //From tool info
+    private String toolBrand; //From tool info
+    private BigDecimal dailyRentalCharge; //Amount per day, specified by the tool type.
 
-    Integer rentalDays; //Specified at checkout
-    LocalDate checkoutDate; //Specified at checkout
-    Integer discountPercent; //Specified at checkout.
+    private Integer rentalDays; //Specified at checkout
+    private LocalDate checkoutDate; //Specified at checkout
+    private Integer discountPercent; //Specified at checkout.
 
-    LocalDate dueDate; //Calculated from checkout date and rental days.
-    Integer chargeDays; //Count of chargeable days, from day after checkout through and including due date, excluding “no charge” days as specified by the tool type.
-    BigDecimal preDiscountCharge; //Calculated as charge days X daily charge. Resulting total rounded half up to cents.
-    BigDecimal discountAmount; //calculated from discount % and pre-discount charge. Resulting amount rounded half up to cents.
-    BigDecimal finalCharge; //Calculated as pre-discount charge - discount amount.
+    private LocalDate dueDate; //Calculated from checkout date and rental days.
+    private Integer chargeDays; //Count of chargeable days, from day after checkout through and including due date, excluding “no charge” days as specified by the tool type.
+    private BigDecimal preDiscountCharge; //Calculated as charge days X daily charge. Resulting total rounded half up to cents.
+    private BigDecimal discountAmount; //calculated from discount % and pre-discount charge. Resulting amount rounded half up to cents.
+    private BigDecimal finalCharge; //Calculated as pre-discount charge - discount amount.
 
     public void printToConsole() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yy");

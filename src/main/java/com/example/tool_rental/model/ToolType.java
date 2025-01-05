@@ -12,10 +12,10 @@ import java.math.BigDecimal;
 @Entity
 public class ToolType {
     @Id
-    String name;
+    private String name;
 
-    BigDecimal dailyCharge;
-    Boolean weekdayCharge;
-    Boolean weekendCharge;
-    Boolean holidayCharge;
+    private BigDecimal dailyCharge;
+    private Boolean weekdayCharge;
+    private Boolean weekendCharge;
+    private Boolean holidayCharge;
 }
