@@ -24,6 +24,5 @@ public class CheckoutRequest {
     Integer discountPercent;
 
     @NotNull
-    @Future
     LocalDate checkoutDate;
 }
