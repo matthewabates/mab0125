@@ -41,7 +41,6 @@ public class CheckoutController {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Map<String, String>> handleEntityNotFoundException(EntityNotFoundException ex) {
         Map<String, String> response = new HashMap<>();
-        response.put("error", "Resource Not Found");
         response.put("message", ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }

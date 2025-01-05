@@ -1,5 +1,6 @@
 package com.example.tool_rental.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,5 +25,6 @@ public class CheckoutRequest {
     Integer discountPercent;
 
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "M/d/yy")
     LocalDate checkoutDate;
 }

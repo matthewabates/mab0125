@@ -1,0 +1,292 @@
+[
+  {
+    "description": "empty request",
+    "request": {
+      "body": {}
+    },
+    "response": {
+      "status": 400,
+      "body": {
+        "toolCode": "must not be blank",
+        "checkoutDate": "must not be null",
+        "discountPercent": "must not be null",
+        "rentalDayCount": "must not be null"
+      }
+    }
+  },
+
+  {
+    "description": "null fields",
+    "request": {
+      "body": {
+        "toolCode": null,
+        "checkoutDate": null,
+        "discountPercent": null,
+        "rentalDayCount": null
+      }
+    },
+    "response": {
+      "status": 400,
+      "body": {
+        "toolCode": "must not be blank",
+        "checkoutDate": "must not be null",
+        "discountPercent": "must not be null",
+        "rentalDayCount": "must not be null"
+      }
+    }
+  },
+
+  {
+    "description": "blank fields",
+    "request": {
+      "body": {
+        "toolCode": "",
+        "checkoutDate": "",
+        "discountPercent": 1,
+        "rentalDayCount": 1
+      }
+    },
+    "response": {
+      "status": 400,
+      "body": {
+        "toolCode": "must not be blank",
+        "checkoutDate": "must not be null"
+      }
+    }
+  },
+
+  {
+    "description": "discountPercent too low",
+    "request": {
+      "body": {
+        "toolCode": "123",
+        "checkoutDate": 123,
+        "discountPercent": -1,
+        "rentalDayCount": 1
+      }
+    },
+    "response": {
+      "status": 400,
+      "body": {
+        "discountPercent": "must be greater than or equal to 0"
+      }
+    }
+  },
+
+  {
+    "description": "discountPercent too high",
+    "request": {
+      "body": {
+        "toolCode": "123",
+        "checkoutDate": 123,
+        "discountPercent": 101,
+        "rentalDayCount": 1
+      }
+    },
+    "response": {
+      "status": 400,
+      "body": {
+        "discountPercent": "must be less than or equal to 100"
+      }
+    }
+  },
+
+  {
+    "description": "rentalDayCount too low",
+    "request": {
+      "body": {
+        "toolCode": "123",
+        "checkoutDate": 123,
+        "discountPercent": 0,
+        "rentalDayCount": 0
+      }
+    },
+    "response": {
+      "status": 400,
+      "body": {
+        "rentalDayCount": "must be greater than or equal to 1"
+      }
+    }
+  },
+
+  {
+    "description": "invalid (not found) tool code",
+    "request": {
+      "body": {
+        "toolCode": "123",
+        "checkoutDate": "8/10/83",
+        "rentalDayCount": 10,
+        "discountPercent": 40
+      }
+    },
+    "response": {
+      "status": 404,
+      "body": {
+        "message": "Tool with code 123 not found."
+      }
+    }
+  },
+
+  {
+    "description": "Test 1",
+    "request": {
+      "body": {
+        "toolCode": "JAKR",
+        "checkoutDate": "9/3/15",
+        "rentalDayCount": 5,
+        "discountPercent": 101
+      }
+    },
+    "response": {
+      "status": 400,
+      "body": {
+        "discountPercent": "must be less than or equal to 100"
+      }
+    }
+  },
+
+  {
+    "description": "Test 2",
+    "request": {
+      "body": {
+        "toolCode": "LADW",
+        "checkoutDate": "7/2/20",
+        "rentalDayCount": 3,
+        "discountPercent": 10
+      }
+    },
+    "response": {
+      "status": 200,
+      "body": {
+        "toolCode": "LADW",
+        "toolType": "Ladder",
+        "toolBrand": "Werner",
+        "dailyRentalCharge": 1.99,
+        "rentalDays": 3,
+        "checkoutDate": "2020-07-02",
+        "discountPercent": 10,
+        "dueDate": "2020-07-05",
+        "chargeDays": 2,
+        "preDiscountCharge": 3.98,
+        "discountAmount": 0.4,
+        "finalCharge": 3.58
+      }
+    }
+  },
+
+  {
+    "description": "Test 3",
+    "request": {
+      "body": {
+        "toolCode": "CHNS",
+        "checkoutDate": "7/2/15",
+        "rentalDayCount": 5,
+        "discountPercent": 25
+      }
+    },
+    "response": {
+      "status": 200,
+      "body": {
+        "toolCode": "CHNS",
+        "toolType": "Chainsaw",
+        "toolBrand": "Stihl",
+        "dailyRentalCharge": 1.49,
+        "rentalDays": 5,
+        "checkoutDate": "2015-07-02",
+        "discountPercent": 25,
+        "dueDate": "2015-07-07",
+        "chargeDays": 3,
+        "preDiscountCharge": 4.47,
+        "discountAmount": 1.12,
+        "finalCharge": 3.35
+      }
+    }
+  },
+
+  {
+    "description": "Test 4",
+    "request": {
+      "body": {
+        "toolCode": "JAKD",
+        "checkoutDate": "9/3/15",
+        "rentalDayCount": 6,
+        "discountPercent": 0
+      }
+    },
+    "response": {
+      "status": 200,
+      "body": {
+        "toolCode": "JAKD",
+        "toolType": "Jackhammer",
+        "toolBrand": "DeWalt",
+        "dailyRentalCharge": 2.99,
+        "rentalDays": 6,
+        "checkoutDate": "2015-09-03",
+        "discountPercent": 0,
+        "dueDate": "2015-09-09",
+        "chargeDays": 3,
+        "preDiscountCharge": 8.97,
+        "discountAmount": 0,
+        "finalCharge": 8.97
+      }
+    }
+  },
+
+  {
+    "description": "Test 5",
+    "request": {
+      "body": {
+        "toolCode": "JAKR",
+        "checkoutDate": "7/2/15",
+        "rentalDayCount": 9,
+        "discountPercent": 0
+      }
+    },
+    "response": {
+      "status": 200,
+      "body": {
+        "toolCode": "JAKR",
+        "toolType": "Jackhammer",
+        "toolBrand": "Ridgid",
+        "dailyRentalCharge": 2.99,
+        "rentalDays": 9,
+        "checkoutDate": "2015-07-02",
+        "discountPercent": 0,
+        "dueDate": "2015-07-11",
+        "chargeDays": 5,
+        "preDiscountCharge": 14.95,
+        "discountAmount": 0,
+        "finalCharge": 14.95
+      }
+    }
+  },
+
+  {
+    "description": "Test 6",
+    "request": {
+      "body": {
+        "toolCode": "JAKR",
+        "checkoutDate": "7/2/20",
+        "rentalDayCount": 4,
+        "discountPercent": 50
+      }
+    },
+    "response": {
+      "status": 200,
+      "body": {
+        "toolCode": "JAKR",
+        "toolType": "Jackhammer",
+        "toolBrand": "Ridgid",
+        "dailyRentalCharge": 2.99,
+        "rentalDays": 4,
+        "checkoutDate": "2020-07-02",
+        "discountPercent": 50,
+        "dueDate": "2020-07-06",
+        "chargeDays": 1,
+        "preDiscountCharge": 2.99,
+        "discountAmount": 1.5,
+        "finalCharge": 1.49
+      }
+    }
+  }
+]
