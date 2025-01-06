@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * REST controller for handling checkout operations.
+ * Provides endpoints for processing checkout requests and managing related exceptions.
+ */
 @RestController
 public class CheckoutController {
 
@@ -27,6 +31,12 @@ public class CheckoutController {
         return ResponseEntity.ok(rentalAgreement);
     }
 
+    /*
+      In a real application with more than one controller, these exception handlers
+      could be extracted into a global @ControllerAdvice to avoid cluttering the controller.
+      This would help keep the controller focused on business logic while delegating
+      exception handling to a dedicated class that could be reused by other controllers.
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
