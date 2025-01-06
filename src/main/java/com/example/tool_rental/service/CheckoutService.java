@@ -7,7 +7,6 @@ import com.example.tool_rental.repo.ToolRepository;
 import com.example.tool_rental.util.CostUtil;
 import com.example.tool_rental.util.DateUtil;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /*
@@ -18,14 +17,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class CheckoutService {
 
-    @Autowired
-    ToolRepository toolRepository;
+    private final ToolRepository toolRepository;
+    private final CostUtil costUtil;
+    private final DateUtil dateUtil;
 
-    @Autowired
-    CostUtil costUtil;
-
-    @Autowired
-    DateUtil dateUtil;
+    public CheckoutService(ToolRepository toolRepository, CostUtil costUtil, DateUtil dateUtil) {
+        this.toolRepository = toolRepository;
+        this.costUtil = costUtil;
+        this.dateUtil = dateUtil;
+    }
 
     public RentalAgreement checkout(CheckoutRequest checkoutRequest) {
         Tool tool = getTool(checkoutRequest);
