@@ -5,7 +5,6 @@ import com.example.tool_rental.model.RentalAgreement;
 import com.example.tool_rental.service.CheckoutService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -22,8 +21,11 @@ import java.util.Map;
 @RestController
 public class CheckoutController {
 
-    @Autowired
-    CheckoutService checkoutService;
+    private final CheckoutService checkoutService;
+
+    public CheckoutController(CheckoutService checkoutService) {
+        this.checkoutService = checkoutService;
+    }
 
     @PostMapping("/checkout")
     public ResponseEntity<RentalAgreement> checkout(@Valid @RequestBody CheckoutRequest checkoutRequest) {

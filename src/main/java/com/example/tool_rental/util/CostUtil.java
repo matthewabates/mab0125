@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Service
 public class CostUtil {
 
-    DateUtil dateUtil;
+    private final DateUtil dateUtil;
 
     public CostUtil(DateUtil dateUtil) {
         this.dateUtil = dateUtil;
