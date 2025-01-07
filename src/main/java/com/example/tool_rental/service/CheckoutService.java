@@ -3,10 +3,8 @@ package com.example.tool_rental.service;
 import com.example.tool_rental.model.CheckoutRequest;
 import com.example.tool_rental.model.RentalAgreement;
 import com.example.tool_rental.model.Tool;
-import com.example.tool_rental.repo.ToolRepository;
 import com.example.tool_rental.util.CostUtil;
 import com.example.tool_rental.util.DateUtil;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 /*
@@ -17,18 +15,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class CheckoutService {
 
-    private final ToolRepository toolRepository;
+    private final ToolService toolService;
     private final CostUtil costUtil;
     private final DateUtil dateUtil;
 
-    public CheckoutService(ToolRepository toolRepository, CostUtil costUtil, DateUtil dateUtil) {
-        this.toolRepository = toolRepository;
+    public CheckoutService(ToolService toolService, CostUtil costUtil, DateUtil dateUtil) {
+        this.toolService = toolService;
         this.costUtil = costUtil;
         this.dateUtil = dateUtil;
     }
 
     public RentalAgreement checkout(CheckoutRequest checkoutRequest) {
-        Tool tool = getTool(checkoutRequest);
+        Tool tool = toolService.getTool(checkoutRequest.getToolCode());
         RentalAgreement rentalAgreement = new RentalAgreement();
 
         //from tool info
@@ -52,11 +50,6 @@ public class CheckoutService {
         rentalAgreement.printToConsole();
 
         return rentalAgreement;
-    }
-
-    private Tool getTool(CheckoutRequest checkoutRequest) {
-        return toolRepository.findByToolCode(checkoutRequest.getToolCode())
-                .orElseThrow(() -> new EntityNotFoundException("Tool with code " + checkoutRequest.getToolCode() + " not found."));
     }
 
 }
